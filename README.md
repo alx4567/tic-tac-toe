@@ -1,3 +1,3 @@
 # tic-tac-toe
 
-# Console tic-tac-toe built from ruby
+Console tic-tac-toe built from ruby
