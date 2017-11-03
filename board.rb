@@ -15,9 +15,18 @@ class Board
         puts " #{@game_cells[6]} | #{@game_cells[7]} | #{@game_cells[8]}"
     end
 
+    # Checks is space is taken
+    def valid_move?(location)
+        if @game_cells[(location.to_i - 1)].class == Fixnum 
+            true
+        else
+            false
+        end
+    end
+
     # Places current player's symbol on board
     def mark_player_move(position, symbol)
-        @game_cells[position] = symbol
+        @game_cells[(position-1)] = symbol
     end
 
     # Checks to see if current player has won game
@@ -29,7 +38,7 @@ class Board
             ( @game_cells[6] == @game_cells[7] && @game_cells[7] == @game_cells[8] ) ||
             # Verticle wins
             ( @game_cells[0] == @game_cells[3] && @game_cells[3] == @game_cells[6] ) ||
-            ( @game_cells[1] == @game_cells[3] && @game_cells[4] == @game_cells[7] ) ||
+            ( @game_cells[1] == @game_cells[4] && @game_cells[4] == @game_cells[7] ) ||
             ( @game_cells[2] == @game_cells[5] && @game_cells[5] == @game_cells[8] ) ||
             # Diagnol wins
             ( @game_cells[0] == @game_cells[4] && @game_cells[4] == @game_cells[8] ) ||
@@ -43,11 +52,13 @@ class Board
 
     # Checks if game is tied by seeing if any integers are left in @game_cells
     def tie_game?
-        if @game_cells.include?(1)
-            false
-        else
-            true
+        tie = true
+        @game_cells.each do |cell|
+            if cell.class == Fixnum
+                tie = false
+            end
         end
+        tie
     end
 
     # Checks if game is over

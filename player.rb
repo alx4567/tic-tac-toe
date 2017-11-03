@@ -7,17 +7,20 @@ class Player
         @symbol = symbol
     end
 
+    # 
     def player_move
         puts "\n#{@name}'s turn. Choose a cell"
 
+        # Tests if response is 1-9
         while @cell_picked = gets.chomp
             case @cell_picked.to_i
             when 1..9
-                @cell
+                break
             else
                 puts "\nInvalid response. Try again"
             end
         end
+        @cell_picked
     end
 end
 
