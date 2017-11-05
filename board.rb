@@ -65,4 +65,27 @@ class Board
     def game_over?
         win_game? || tie_game?
     end
+
+    def reset_board
+        @game_cells = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    end
+
+    def play_again?
+        puts "Do you want to play again? (y/n)"
+
+        while reset_game = gets.chomp
+            case reset_game.downcase
+            when "y"
+                reset_game = false
+                reset_board
+                break
+            when "n"
+                reset_game = true
+                break
+            else
+                puts "Invalid input. Try again."
+            end
+        end
+        reset_game
+    end
 end
