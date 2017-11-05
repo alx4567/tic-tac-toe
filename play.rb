@@ -56,7 +56,7 @@ until stop
 
     board.mark_player_move(players_move.to_i, active_player.symbol)
 
-    if board.win_game?
+    if board.win_game?(active_player.symbol)
         board.display_board
         puts "\n#{active_player.name} has won!"
         stop = board.play_again?

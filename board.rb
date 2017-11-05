@@ -2,22 +2,23 @@ class Board
     attr_reader :game_cells
 
     def initialize
-        @game_cells = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        @game_cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
     end
 
     # Displays current board to console
     def display_board
+        puts "\n Game Board        Key"
         puts "\n"
-        puts " #{@game_cells[0]} | #{@game_cells[1]} | #{@game_cells[2]}"
-        puts "---+---+---"
-        puts " #{@game_cells[3]} | #{@game_cells[4]} | #{@game_cells[5]}"
-        puts "---+---+---"
-        puts " #{@game_cells[6]} | #{@game_cells[7]} | #{@game_cells[8]}"
+        puts " #{@game_cells[0]} | #{@game_cells[1]} | #{@game_cells[2]}      1 | 2 | 3"
+        puts "---+---+---    ---+---+---"
+        puts " #{@game_cells[3]} | #{@game_cells[4]} | #{@game_cells[5]}      4 | 5 | 6"
+        puts "---+---+---    ---+---+---"
+        puts " #{@game_cells[6]} | #{@game_cells[7]} | #{@game_cells[8]}      7 | 8 | 9"
     end
 
     # Checks is space is taken
     def valid_move?(location)
-        if @game_cells[(location.to_i - 1)].class == Fixnum 
+        if @game_cells[(location.to_i - 1)] == " "
             true
         else
             false
@@ -30,19 +31,19 @@ class Board
     end
 
     # Checks to see if current player has won game
-    def win_game?
+    def win_game?(symbol)
 
         if # Horizontal wins
-            ( @game_cells[0] == @game_cells[1] && @game_cells[1] == @game_cells[2] ) ||
-            ( @game_cells[3] == @game_cells[4] && @game_cells[4] == @game_cells[5] ) ||
-            ( @game_cells[6] == @game_cells[7] && @game_cells[7] == @game_cells[8] ) ||
+            ( @game_cells[0] == symbol && @game_cells[1] == symbol && @game_cells[2] == symbol ) ||
+            ( @game_cells[3] == symbol && @game_cells[4] == symbol && @game_cells[5] == symbol) ||
+            ( @game_cells[6] == symbol && @game_cells[7] == symbol && @game_cells[8] == symbol) ||
             # Verticle wins
-            ( @game_cells[0] == @game_cells[3] && @game_cells[3] == @game_cells[6] ) ||
-            ( @game_cells[1] == @game_cells[4] && @game_cells[4] == @game_cells[7] ) ||
-            ( @game_cells[2] == @game_cells[5] && @game_cells[5] == @game_cells[8] ) ||
+            ( @game_cells[0] == symbol && @game_cells[3] == symbol && @game_cells[6] == symbol ) ||
+            ( @game_cells[1] == symbol && @game_cells[4] == symbol && @game_cells[7] == symbol ) ||
+            ( @game_cells[2] == symbol && @game_cells[5] == symbol && @game_cells[8] == symbol ) ||
             # Diagnol wins
-            ( @game_cells[0] == @game_cells[4] && @game_cells[4] == @game_cells[8] ) ||
-            ( @game_cells[6] == @game_cells[4] && @game_cells[4] == @game_cells[2] )
+            ( @game_cells[0] == symbol && @game_cells[4] == symbol && @game_cells[8] == symbol ) ||
+            ( @game_cells[6] == symbol && @game_cells[4] == symbol && @game_cells[2] == symbol )
 
             true
         else
@@ -54,20 +55,15 @@ class Board
     def tie_game?
         tie = true
         @game_cells.each do |cell|
-            if cell.class == Fixnum
+            if cell == " "
                 tie = false
             end
         end
         tie
     end
 
-    # Checks if game is over
-    def game_over?
-        win_game? || tie_game?
-    end
-
     def reset_board
-        @game_cells = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        @game_cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
     end
 
     def play_again?
@@ -81,6 +77,7 @@ class Board
                 break
             when "n"
                 reset_game = true
+                puts "See you later!"
                 break
             else
                 puts "Invalid input. Try again."
