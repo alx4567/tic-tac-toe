@@ -73,32 +73,3 @@ until stop
     end
 end
 
-# until board.game_over?
-#     board.display_board
-    
-#     # Gets active players move and tests its validity
-#     while players_move = active_player.player_move
-#         if board.valid_move?(players_move)
-#             break
-#         else
-#             puts "Space already taken. Try again."
-#         end
-#     end
-
-#     board.mark_player_move(players_move.to_i, active_player.symbol)
-
-#     if board.win_game?
-#         board.display_board
-#         puts "\n#{active_player.name} has won!"
-#     elsif board.tie_game?
-#         board.display_board
-#         puts "\nYou have tied!"
-#     else
-#         if active_player == player1
-#             active_player = player2
-#         else
-#             active_player = player1
-#         end
-#     end
-# end
-
